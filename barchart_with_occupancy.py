@@ -8,13 +8,15 @@ import matplotlib.ticker as ticker
 
 
 def energy_and_occupancy_barchart_design(df_pivot_working_hours,
-                                         df_occupancy_cur,
                                          day_code_list,
                                          tick_range_e,
-                                         tick_range_o,
-                                         top_hours):
+                                         top_hours,
+                                         fs,
+                                         path_for_fig = None,
+                                         tick_range_o= None,
+                                         df_occupancy_cur= None):
         
-        fig, ax = plt.subplots(1, 1, figsize=(8, 3.5))
+        fig, ax = plt.subplots(1, 1, figsize=fs)#(8, 3.5) -- Charter house and academy
 
         plt.style.use('seaborn-white')# set ggplot style
         ax_l = ax
@@ -26,12 +28,14 @@ def energy_and_occupancy_barchart_design(df_pivot_working_hours,
         ax_l.set_yticks(np.arange(0, tick_range_e, 0.1))
         ax_l.yaxis.set_major_formatter(FormatStrFormatter('%.1f'))
 
-        # the right y axis
-        ax_r = ax_l.twinx() # instantiate a second axes that shares the same x-axis
-        ax_r.set_ylabel("People Registered", labelpad=10,fontsize ='12')
-        ax_r.set_ylim(tick_range_o)
-        ax_r.plot(df_occupancy_cur['occupancy'], color= 'k', lw=0.6, ls='dashed',marker=".",ms=6, mec="k",label='Occupancy')
-        ax_r.legend(loc='upper right', bbox_to_anchor=(0.97, 0.98))
+        if df_occupancy_cur is not None:
+
+            # the right y axis
+            ax_r = ax_l.twinx() # instantiate a second axes that shares the same x-axis
+            ax_r.set_ylabel("People Registered", labelpad=10,fontsize ='12')
+            ax_r.set_ylim(tick_range_o)
+            ax_r.plot(df_occupancy_cur['occupancy'], color= 'k', lw=0.6, ls='dashed',marker=".",ms=6, mec="k",label='Occupancy')
+            ax_r.legend(loc='upper right', bbox_to_anchor=(0.97, 0.98))
 
         top_hours = True # False: in-hours, True: out-of-hours
         bot_hours = not top_hours
@@ -78,3 +82,5 @@ def energy_and_occupancy_barchart_design(df_pivot_working_hours,
         ax_l.set_xticklabels(day_code_list)
         ax_l.tick_params(axis='x', which='major', pad=8)
         fig.tight_layout()
+        if path_for_fig is not None:
+            fig.savefig(path_for_fig)

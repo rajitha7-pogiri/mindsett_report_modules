@@ -50,7 +50,8 @@ def generate_legend_labels_for_piechart_with_triangle(df_asset_class_monthly_sum
 
 def piechart_comparison_design(df_asset_class_monthly_sum_others, 
                                 sum_column = "sum",
-                                pct_column = "sub_pct"):
+                                pct_column = "sub_pct", 
+                                path_for_fig = None):
 
     fig, ax = plt.subplots(1, 1, figsize=(9, 3.9))
 
@@ -81,3 +82,5 @@ def piechart_comparison_design(df_asset_class_monthly_sum_others,
 
     # text_kwargs = dict(ha='center', va='center', fontsize=14, color='k')
     fig.tight_layout(pad=1.2, rect=[-0.05,0.1,0.72, 0.95])
+    if path_for_fig is not None:
+        fig.savefig(path_for_fig)

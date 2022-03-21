@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def co2_design(df_grouped_working_hours_month_unstacked):
+    
     xlocs, xlabs = plt.xticks()
     for i, (h,v) in enumerate(zip(df_grouped_working_hours_month_unstacked.max(axis=1), df_grouped_working_hours_month_unstacked.sum(axis=1))):
         plt.text(xlocs[i],8.4, str(round(v*0.233,1)) + r"$\,t$", 

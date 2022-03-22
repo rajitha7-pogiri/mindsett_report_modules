@@ -325,7 +325,10 @@ def benchmarking_design(ax, consumption_mwh_cur, floor_sqm,
         
         ax.add_artist(title_text)
 
-def energy_meter_with_benchmarking(consumption_mwh_cur, consumption_mwh_pre, floor_sqm,
+def energy_meter_with_benchmarking(consumption_mwh_cur, consumption_mwh_pre, floor_size,
+                                    size_in_sqm = True,
+                                    industry = "office",
+                                    period = 30,
                                     conv_mwh_co2 = 0.233,
                                     conv_mwh_pnd = 129.5,
                                     fx = 0.2, # fancy box x-axis value
@@ -339,13 +342,27 @@ def energy_meter_with_benchmarking(consumption_mwh_cur, consumption_mwh_pre, flo
 
     plt.style.use('seaborn-white')
     fig, ax = plt.subplots(figsize=(5, 5.5))
+
+    if size_in_sqm:
+        floor_sqm = floor_size
+    else:
+        floor_sqm = floor_size * 0.0929
+
+    if industry == "office":
+        floor_sqm_as_office = floor_sqm
+    elif industry == "food service":
+        # https://cdn2.hubspot.net/hubfs/5055051/Offers/Energy%20Benchmarking%20Report%20-%20Iota.pdf?utm_campaign=Offer%3A%20Energy%20Benchmarking%20Report&utm_medium=email&_hsmi=72631957&_hsenc=p2ANqtz-8urx_6ejMPQ25rp-u0vAHPq0cmKPTvL18SQTEf22gtrdDV2x7wGnd5kkP40_bx3M5hOWp3tysnbPI4JjWriJEp2fb5o7PzNF5D9VFqQNjYVLVxKtE&utm_content=72631957&utm_source=hs_automation
+        floor_sqm_as_office = floor_sqm * 3.66 
+
+    floor_sqm_as_office_for_month = floor_sqm_as_office * period / 30 # default days in a month
+
     
     energy_meter_design(ax, consumption_mwh_cur, consumption_mwh_pre, 
                         conv_mwh_co2=conv_mwh_co2,
                         conv_mwh_pnd=conv_mwh_pnd,
                         fx=fx, fy=fy, fs=fs,
                         image_folder = image_folder)
-    benchmarking_design(ax, consumption_mwh_cur, floor_sqm,
+    benchmarking_design(ax, consumption_mwh_cur, floor_sqm_as_office_for_month,
                         fx=fx, fy=fy-0.12, fs=fs,
                         kwh_per_sqm_good=kwh_per_sqm_good,
                         kwh_per_sqm_typical=kwh_per_sqm_typical

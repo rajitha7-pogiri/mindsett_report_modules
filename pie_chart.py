@@ -30,11 +30,14 @@ def generate_legend_labels_for_piechart_with_triangle(df_asset_class_monthly_sum
 
         # print(f"item[{pct_column}]: ", item[pct_column])
 
-        if item[pct_column] > 0: # abs(item["sub_pct"]) < 0.05: label_arrow_str = r'$\sim$' elif
+        if item[pct_column] > 0.005: # abs(item["sub_pct"]) < 0.05: label_arrow_str = r'$\sim$' elif
             label_arrow_str = r'${\blacktriangle}$'
 
-        else:
+        elif item[pct_column] < -0.005:
             label_arrow_str = r'$\:\!\triangledown\:\!$'
+
+        else:
+            label_arrow_str = r'--'
         
         label_arrow_pad = ' '
         label_arrow = label_arrow_pad + label_arrow_str

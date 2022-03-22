@@ -334,6 +334,7 @@ def energy_meter_with_benchmarking(consumption_mwh_cur, consumption_mwh_pre, flo
                                     image_folder = image_folder,
                                     kwh_per_sqm_good = 10.33,
                                     kwh_per_sqm_typical = 14.5,
+                                    path_for_fig = None
                                   ):
 
     plt.style.use('seaborn-white')
@@ -353,3 +354,5 @@ def energy_meter_with_benchmarking(consumption_mwh_cur, consumption_mwh_pre, flo
     ax.set_ylim(-1, 2)
 
     plt.axis('off')
+    if path_for_fig is not None:
+        fig.savefig(path_for_fig)

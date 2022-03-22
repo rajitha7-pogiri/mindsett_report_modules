@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import (MultipleLocator, FormatStrFormatter, AutoMinorLocator)
 import matplotlib.ticker as ticker
+import datetime
 
 
 
@@ -81,6 +82,9 @@ def energy_and_occupancy_barchart_design(df_pivot_working_hours,
 
         ax_l.set_xticklabels(day_code_list)
         ax_l.tick_params(axis='x', which='major', pad=8)
+        top_index = df_pivot_working_hours.index.min() - pd.Timedelta("1D")
+        bot_index = df_pivot_working_hours.index.max() + pd.Timedelta("1D")
+        ax.set_xlim([top_index, bot_index])
         fig.tight_layout()
         if path_for_fig is not None:
             fig.savefig(path_for_fig)

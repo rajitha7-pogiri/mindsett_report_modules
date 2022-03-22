@@ -48,7 +48,7 @@ def generate_legend_labels_for_piechart_with_triangle(df_asset_class_monthly_sum
     return labels
 
 
-def piechart_comparison_design(df_asset_class_monthly_sum_others, 
+def piechart_comparison_design(df_asset_class_monthly_sum_others, ncol,loc,
                                 sum_column = "sum",
                                 pct_column = "sub_pct", 
                                 path_for_fig = None):
@@ -66,8 +66,8 @@ def piechart_comparison_design(df_asset_class_monthly_sum_others,
                                                         wedgeprops={'linewidth': 1.5, "edgecolor": other_colours[0]}, labels=None)
 
     ax.legend(labels=generate_legend_labels_for_piechart_with_triangle(df_asset_class_monthly_sum_others, sum_column=sum_column, pct_column=pct_column),
-              loc="center right",  edgecolor=other_colours[1], facecolor='white',
-              bbox_to_anchor=(1.27, 0, 1, 1), fontsize=13,  ncol=1, handleheight=1.2, labelspacing=0.6, title=None)
+              loc=loc,  edgecolor=other_colours[1], facecolor='white',
+              bbox_to_anchor=(1, 0, 1, 1), fontsize=12,  ncol=ncol, handleheight=1.2, labelspacing=0.6, title=None) # "center right" - charter house,bbox_to_anchor=(1.27, 0, 1, 1)
 
    
     ax.set_ylabel("")
@@ -81,6 +81,6 @@ def piechart_comparison_design(df_asset_class_monthly_sum_others,
     # sub_pct = ((sum_cur - sum_pre)/sum_pre) * 100
 
     # text_kwargs = dict(ha='center', va='center', fontsize=14, color='k')
-    fig.tight_layout(pad=1.2, rect=[-0.05,0.1,0.72, 0.95])
+    fig.tight_layout(pad=1.2, rect=[-0.05,0.1,0.72, 0.95]) #rect=[-0.05,0.1,0.72, 0.95]
     if path_for_fig is not None:
         fig.savefig(path_for_fig)

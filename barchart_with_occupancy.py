@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import (MultipleLocator, FormatStrFormatter, AutoMinorLocator)
 import matplotlib.ticker as ticker
-import datetime
 
 def energy_and_occupancy_barchart_design(df_pivot_working_hours,
                                          day_code_list,

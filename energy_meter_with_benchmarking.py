@@ -318,12 +318,12 @@ def benchmarking_design(ax, consumption_mwh_cur, floor_sqm,
 
         tt_x = ru_x + ru_w/2
         tt_y = ru_y - 0.26
-        title = f"BBP Benchmarking (REEB)"
-        tt_c = '#9F9D9C'
-        title_text = mpltext.Text(x=fx+tt_x*fs, y=fy+tt_y*fs, text=f'{title}', 
-                                  va="center", ha="center", color=tt_c, fontweight="normal", fontsize=12) #fontfamily='serif'
+        #title = f"BBP Benchmarking (REEB)"
+        #tt_c = '#9F9D9C'
+        #title_text = mpltext.Text(x=fx+tt_x*fs, y=fy+tt_y*fs, text=f'{title}', 
+                                  #va="center", ha="center", color=tt_c, fontweight="normal", fontsize=12) #fontfamily='serif'
         
-        ax.add_artist(title_text)
+        #ax.add_artist(title_text)
 
 def energy_meter_with_benchmarking(consumption_mwh_cur, consumption_mwh_pre, floor_size,
                                     size_in_sqm = True,
@@ -352,7 +352,7 @@ def energy_meter_with_benchmarking(consumption_mwh_cur, consumption_mwh_pre, flo
         floor_sqm_as_office = floor_sqm
     elif industry == "food service":
         # https://cdn2.hubspot.net/hubfs/5055051/Offers/Energy%20Benchmarking%20Report%20-%20Iota.pdf?utm_campaign=Offer%3A%20Energy%20Benchmarking%20Report&utm_medium=email&_hsmi=72631957&_hsenc=p2ANqtz-8urx_6ejMPQ25rp-u0vAHPq0cmKPTvL18SQTEf22gtrdDV2x7wGnd5kkP40_bx3M5hOWp3tysnbPI4JjWriJEp2fb5o7PzNF5D9VFqQNjYVLVxKtE&utm_content=72631957&utm_source=hs_automation
-        floor_sqm_as_office = floor_sqm * 3.66 
+        floor_sqm_as_office = floor_sqm * 3 #55/15
 
     floor_sqm_as_office_for_month = floor_sqm_as_office * period / 30 # default days in a month
 
